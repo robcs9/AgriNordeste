@@ -1,0 +1,134 @@
+<html>
+    <head>
+        <script>
+            function excluirCat() {
+            
+            }
+            function excluirReg() {
+            
+            }
+            function editarCat() {
+            
+            }
+            function editarReg() {
+            
+            }
+            window.onload = () => {
+                let form0 = document.getElementById("form");
+                let filtro = document.getElementById("filtro");
+                let categ = document.getElementById("categorias");
+                let enviarBt = document.getElementById("enviarBt");
+                let edit1Bt = document.getElementById("edit1");
+                let exc1Bt = document.getElementById("exc1");
+                
+                enviarBt.addEventListener("click",()=> {
+                    if(filtro.value != "") {
+                        const opt = document.createElement("option");
+                        opt.value = filtro.value.toUpperCase();
+                        opt.innerHTML = filtro.value.toUpperCase();
+                        for(let i = 0; i < categ.children.length; i++) {
+                            if(i == categ.children.length - 1 && opt.value != categ.children[i].innerHTML) {
+                                categ.appendChild(opt);
+                            }
+                        }
+                    }
+                });
+                
+                edit1Bt.addEventListener("click", ()=> {
+                    filtro.value = categ.value;
+                    for(let i = 0; i < categ.children.length; i++) {
+                        if(categ.value == categ.children[i].innerHTML) {
+                            categ.children[i].remove();
+                        }
+                    }
+                    form0.lastChild.remove();
+                });
+                exc1Bt.addEventListener("click", ()=> {
+                    for(let i = 0; i < categ.children.length; i++) {
+                        if(categ.value == categ.children[i].innerHTML) {
+                            categ.removeChild(categ.children[i]);
+                        }
+                    }
+                    form0.lastChild.remove();
+                });
+
+                // weird behaviors
+                /*let culturas = [];
+                for(let i = 0; i < 3; i++) {
+                    culturas.push(document.createElement("option"));
+                }
+                culturas[0].value = "cana";
+                culturas[0].innerHTML = culturas[0].value;
+                culturas[1].value = "uva";
+                culturas[1].innerHTML = culturas[1].value;
+                culturas[2].value = "cacau";
+                culturas[2].innerHTML = culturas[2].value;
+                
+                categ.addEventListener("change", ()=>{
+                    if(form0.lastChild.value != 0) {
+                        form0.lastChild.remove();
+                    }
+
+                    const plantio = document.createElement("select");
+
+                    if(categ.value == "PE") {
+                        plantio.appendChild(culturas[0]);
+                        plantio.appendChild(culturas[1]);
+                        form0.appendChild(plantio);
+                    }
+                    else if(categ.value == "RN") {
+                        plantio.appendChild(culturas[3]);
+                        form0.appendChild(plantio);
+                    }
+                });*/
+
+                // The event function works as intended, only lacks the remaining op options
+                categ.addEventListener("change", ()=>{
+                    if(form0.lastChild.value != 0) {
+                        form0.lastChild.remove();
+                    }
+                    
+                    if(categ.value == "PE") {
+                        const plantio = document.createElement("select");
+                        const op1 = document.createElement("option");
+                        op1.value = "cana";
+                        op1.innerHTML = op1.value;
+                        
+                        const op2 = document.createElement("option");
+                        op2.value = "uva";
+                        op2.innerHTML = op2.value;
+                        
+                        plantio.appendChild(op1);
+                        plantio.appendChild(op2);
+                        form0.appendChild(plantio);
+                    }
+                    else if(categ.value == "RN") {
+                        const plantio = document.createElement("select");
+                        const op1 = document.createElement("option");
+                        op1.value = "cacau";
+                        op1.innerHTML = op1.value;
+
+                        plantio.appendChild(op1);
+                        form0.appendChild(plantio);
+                    }
+                });
+            }
+            
+        </script>
+    </head>
+    <body>
+        <header>
+            <h2 style="text-align: center;">Principais Culturas Agrícolas no Nordeste Brasileiro</h2>
+        </header>
+        <form id="form" onsubmit="return false;" style="display: flex; justify-content: center; gap: 8px;">
+            <input type="text" id="filtro" placeholder="Siglas da UF" maxlength="2">
+            <button id="enviarBt">Enviar</button>
+            <br/><br/>
+            <select name="categorias" id="categorias">
+                <option value="0">Estados</option>
+            </select>
+            <button id="edit1">Editar</button><button id="exc1">Excluir</button>
+            <br/><br/>
+        </form>
+    </body>
+</html>
