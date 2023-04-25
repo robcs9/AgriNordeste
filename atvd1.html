@@ -46,28 +46,26 @@
                     if(form0.lastChild.value != 0) {
                         form0.lastChild.remove();
                     }
-                    
-                    if(categ.value == "PE") {
-                        const plantio = document.createElement("select");
-                        const op1 = document.createElement("option");
-                        op1.value = "Cana-de-açúcar";
-                        op1.innerHTML = op1.value;
-                        
-                        const op2 = document.createElement("option");
-                        op2.value = "Mandioca";
-                        op2.innerHTML = op2.value;
-                        
-                        const op3 = document.createElement("option");
-                        op3.value = "Frutas Tropicais";
-                        op3.innerHTML = op3.value;
-
-                        plantio.appendChild(op1);
-                        plantio.appendChild(op2);
-                        plantio.appendChild(op3);
-                        form0.appendChild(plantio);
-                    }
-
                     switch(categ.value) {
+                        case "PE":
+                            const plantio = document.createElement("select");
+                            const op1 = document.createElement("option");
+                            op1.value = "Cana-de-açúcar";
+                            op1.innerHTML = op1.value;
+
+                            const op2 = document.createElement("option");
+                            op2.value = "Mandioca";
+                            op2.innerHTML = op2.value;
+
+                            const op3 = document.createElement("option");
+                            op3.value = "Frutas Tropicais";
+                            op3.innerHTML = op3.value;
+
+                            plantio.appendChild(op1);
+                            plantio.appendChild(op2);
+                            plantio.appendChild(op3);
+                            form0.appendChild(plantio);
+                            break;
                         case "RN":
                             addCrop(form0, "Cana-de-açúcar, Frutas tropicais, Castanha de caju".split(','));
                             break;
