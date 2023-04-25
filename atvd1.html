@@ -1,18 +1,8 @@
-<html>
+<!DOCTYPE html>
+<html lang="pt-br">
     <head>
+        <meta charset="utf-8">
         <script>
-            function excluirCat() {
-            
-            }
-            function excluirReg() {
-            
-            }
-            function editarCat() {
-            
-            }
-            function editarReg() {
-            
-            }
             window.onload = () => {
                 let form0 = document.getElementById("form");
                 let filtro = document.getElementById("filtro");
@@ -20,7 +10,7 @@
                 let enviarBt = document.getElementById("enviarBt");
                 let edit1Bt = document.getElementById("edit1");
                 let exc1Bt = document.getElementById("exc1");
-                
+
                 enviarBt.addEventListener("click",()=> {
                     if(filtro.value != "") {
                         const opt = document.createElement("option");
@@ -51,38 +41,7 @@
                     }
                     form0.lastChild.remove();
                 });
-
-                // weird behaviors
-                /*let culturas = [];
-                for(let i = 0; i < 3; i++) {
-                    culturas.push(document.createElement("option"));
-                }
-                culturas[0].value = "cana";
-                culturas[0].innerHTML = culturas[0].value;
-                culturas[1].value = "uva";
-                culturas[1].innerHTML = culturas[1].value;
-                culturas[2].value = "cacau";
-                culturas[2].innerHTML = culturas[2].value;
                 
-                categ.addEventListener("change", ()=>{
-                    if(form0.lastChild.value != 0) {
-                        form0.lastChild.remove();
-                    }
-
-                    const plantio = document.createElement("select");
-
-                    if(categ.value == "PE") {
-                        plantio.appendChild(culturas[0]);
-                        plantio.appendChild(culturas[1]);
-                        form0.appendChild(plantio);
-                    }
-                    else if(categ.value == "RN") {
-                        plantio.appendChild(culturas[3]);
-                        form0.appendChild(plantio);
-                    }
-                });*/
-
-                // The event function works as intended, only lacks the remaining op options
                 categ.addEventListener("change", ()=>{
                     if(form0.lastChild.value != 0) {
                         form0.lastChild.remove();
@@ -91,29 +50,61 @@
                     if(categ.value == "PE") {
                         const plantio = document.createElement("select");
                         const op1 = document.createElement("option");
-                        op1.value = "cana";
+                        op1.value = "Cana-de-açúcar";
                         op1.innerHTML = op1.value;
                         
                         const op2 = document.createElement("option");
-                        op2.value = "uva";
+                        op2.value = "Mandioca";
                         op2.innerHTML = op2.value;
                         
-                        plantio.appendChild(op1);
-                        plantio.appendChild(op2);
-                        form0.appendChild(plantio);
-                    }
-                    else if(categ.value == "RN") {
-                        const plantio = document.createElement("select");
-                        const op1 = document.createElement("option");
-                        op1.value = "cacau";
-                        op1.innerHTML = op1.value;
+                        const op3 = document.createElement("option");
+                        op3.value = "Frutas Tropicais";
+                        op3.innerHTML = op3.value;
 
                         plantio.appendChild(op1);
+                        plantio.appendChild(op2);
+                        plantio.appendChild(op3);
                         form0.appendChild(plantio);
+                    }
+
+                    switch(categ.value) {
+                        case "RN":
+                            addCrop(form0, "Cana-de-açúcar, Frutas tropicais, Castanha de caju".split(','));
+                            break;
+                        case "BA":
+                            addCrop(form0, "Soja, Algodão, Milho, Cacau, Café, Sisal, Frutas tropicais".split(','));
+                            break;
+                        case "CE":
+                            addCrop(form0, "Castanha de Caju, Frutas Tropicais, Milho, Feijão".split(','));
+                            break;
+                        case "MA":
+                            addCrop(form0, "Soja, Arroz, Milho, Algodão".split(','));
+                            break;
+                        case "PB":
+                            addCrop(form0, "Cana-de-açúcar, Frutas tropicais, Milho, Feijão".split(','));
+                            break;
+                        case "PI":
+                            addCrop(form0, "Soja, Milho, Algodão, Feijão, Arroz".split(','));
+                            break;
+                        case "SE":
+                            addCrop(form0, "Cana-de-açúcar, Coco-da-baía, Frutas tropicais".split(','));
+                            break;
+                        case "AL":
+                            addCrop(form0, "Cana-de-açúcar, Coco-da-baía, Frutas tropicais".split(','));
+                            break;
                     }
                 });
             }
-            
+            function addCrop(form1, opts) {
+                const plantio = document.createElement("select");
+                    opts.forEach(elem => {
+                        const op = document.createElement("option");
+                        op.value = elem;
+                        op.innerHTML = elem;
+                        plantio.appendChild(op);
+                    });
+                form1.appendChild(plantio);
+            }
         </script>
     </head>
     <body>
