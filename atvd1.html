@@ -47,6 +47,9 @@
                 
                 edit1Bt.addEventListener("click", () => {
                     filtro.value = categ.value;
+                    if(filtro.value == 0) {
+                        filtro.value = "";
+                    }
                     for(let i = 0; i < categ.children.length; i++) {
                         if(categ.value == categ.children[i].innerHTML) {
                             categ.children[i].remove();
@@ -127,17 +130,17 @@
             }
         </script>
     </head>
-    <body style="margin: 0; padding: 0;">
-        <main style="width: 800px; margin: 0 auto;">
+    <body>
+        <main>
             <header id="header">
-                <h2 id="h2" style="text-align: center; color: green; background-color: lightgreen; margin-bottom: 0;">Principais Culturas Agrícolas no Nordeste Brasileiro</h2>
+                <h2 id="h2">Principais Culturas Agrícolas no Nordeste Brasileiro</h2>
             </header>
-            <form id="form" onsubmit="return false;" style="display: flex; flex-flow: column nowrap; align-items: center; gap: 8px; padding: 10px 0; background-color: beige;">
+            <form id="form" onsubmit="return false;">
                 <div>
                     <input type="text" id="filtro" placeholder="Siglas da UF" maxlength="2">
                     <button id="enviarBt">Enviar</button>
                 </div>
-                <div id="plantacao" style="display: inline-flex">
+                <div id="plantacao">
                     <select name="categorias" id="categorias">
                         <option value="0">Estados</option>
                     </select>
@@ -145,5 +148,30 @@
                 </div>
             </form>
         </main>
+        <style>
+            body {
+                margin: 0; padding: 0;
+            }
+            main {
+                width: 800px; margin: 0 auto;
+            }
+            h2 {
+                text-align: center;
+                color: green;
+                background-color: lightgreen;
+                margin-bottom: 0;
+            }
+            #form {
+                display: flex;
+                flex-flow: column nowrap;
+                align-items: center;
+                gap: 8px;
+                padding: 10px 0;
+                background-color: beige;
+            }
+            #plantacao {
+                display: inline-flex"
+            }
+        </style>
     </body>
 </html>
