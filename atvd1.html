@@ -2,6 +2,27 @@
 <html lang="pt-br">
     <head>
         <meta charset="utf-8">
+        <style>
+            button {
+                border: none;
+                border-radius: 10px;
+                cursor: pointer;
+                margin-left: 1em;
+            }
+            #enviarBt {
+                border: solid 1px;
+            }
+            #edit1 {
+                background: url(./images/edit.svg) no-repeat;
+                width: 20px;
+                height: 20px;
+            }
+            #exc1 {
+                background: url(./images/remove.svg) no-repeat;
+                width: 20px;
+                height: 20px;
+            }
+        </style>
         <script>
             window.onload = () => {
                 let form0 = document.getElementById("form");
@@ -10,7 +31,7 @@
                 let enviarBt = document.getElementById("enviarBt");
                 let edit1Bt = document.getElementById("edit1");
                 let exc1Bt = document.getElementById("exc1");
-
+                
                 enviarBt.addEventListener("click",()=> {
                     if(filtro.value != "") {
                         const opt = document.createElement("option");
@@ -24,27 +45,27 @@
                     }
                 });
                 
-                edit1Bt.addEventListener("click", ()=> {
+                edit1Bt.addEventListener("click", () => {
                     filtro.value = categ.value;
                     for(let i = 0; i < categ.children.length; i++) {
                         if(categ.value == categ.children[i].innerHTML) {
                             categ.children[i].remove();
+                            form0.lastElementChild.remove();
                         }
                     }
-                    form0.lastChild.remove();
                 });
-                exc1Bt.addEventListener("click", ()=> {
+                exc1Bt.addEventListener("click", () => {
                     for(let i = 0; i < categ.children.length; i++) {
+                        console.log(categ.value);
                         if(categ.value == categ.children[i].innerHTML) {
                             categ.removeChild(categ.children[i]);
+                            form0.lastElementChild.remove();
                         }
                     }
-                    form0.lastChild.remove();
                 });
-                
-                categ.addEventListener("change", ()=>{
-                    if(form0.lastChild.value != 0) {
-                        form0.lastChild.remove();
+                categ.addEventListener("change", () => {
+                    if(form0.lastElementChild.id != "plantacao") {
+                        form0.lastElementChild.remove();
                     }
                     switch(categ.value) {
                         case "PE":
@@ -92,6 +113,8 @@
                             break;
                     }
                 });
+                
+                
             }
             function addCrop(form1, opts) {
                 const plantio = document.createElement("select");
@@ -105,19 +128,23 @@
             }
         </script>
     </head>
-    <body>
-        <header>
-            <h2 style="text-align: center;">Principais Culturas Agrícolas no Nordeste Brasileiro</h2>
-        </header>
-        <form id="form" onsubmit="return false;" style="display: flex; justify-content: center; gap: 8px;">
-            <input type="text" id="filtro" placeholder="Siglas da UF" maxlength="2">
-            <button id="enviarBt">Enviar</button>
-            <br/><br/>
-            <select name="categorias" id="categorias">
-                <option value="0">Estados</option>
-            </select>
-            <button id="edit1">Editar</button><button id="exc1">Excluir</button>
-            <br/><br/>
-        </form>
+    <body style="margin: 0; padding: 0;">
+        <main style="width: 800px; margin: 0 auto;">
+            <header id="header">
+                <h2 id="h2" style="text-align: center; color: green; background-color: lightgreen; margin-bottom: 0;">Principais Culturas Agrícolas no Nordeste Brasileiro</h2>
+            </header>
+            <form id="form" onsubmit="return false;" style="display: flex; flex-flow: column nowrap; align-items: center; gap: 8px; padding: 10px 0; background-color: beige;">
+                <div>
+                    <input type="text" id="filtro" placeholder="Siglas da UF" maxlength="2">
+                    <button id="enviarBt">Enviar</button>
+                </div>
+                <div id="plantacao" style="display: inline-flex">
+                    <select name="categorias" id="categorias">
+                        <option value="0">Estados</option>
+                    </select>
+                    <button id="edit1"></button><button id="exc1"></button>
+                </div>
+            </form>
+        </main>
     </body>
 </html>
